@@ -1,0 +1,6 @@
+10000 boards generated in an average of 324.5194 attempts to generate.
+The board that took the longest required 2893 attempts to generate.
+Execution took 321.5710 seconds
+Average time to generate a board: 0.0322 seconds
+
+Using first algorithm

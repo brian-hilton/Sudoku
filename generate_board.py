@@ -49,8 +49,6 @@ def get_square(i,j):
     
     return subgrid_number - 1
 
-
-
 def ran_num(length):
     return random.randint(1,length) - 1
 
@@ -67,17 +65,21 @@ def get_valid_number(i, j, Rows, Cols, Squares):
     return intersection_list[ran_num(len(intersection_list))]
 
 def update_dicts(i, j, val, Rows, Cols, Squares):    
-    # print(Rows[i],'\n')
-    # print(Rows[i+1],'\n')
-
     Rows[i][val] = True
     Cols[j][val] = True
     Squares[get_square(i,j)][val] = True
 
 def print_board(board):
+    # for row in board[:-1]:
+    #     print (row) 
+    # print(board[-1])
     for row in board:
-        print (row, '\n')    
-    print('\n')
+        print(row)   
+
+def print_board_object(board_object):
+    print_board(board_object[0])
+    print('Attempts:', str(board_object[1]), '\n')
+
 
 def populate_board():
     dicts = create_dicts()
@@ -91,15 +93,14 @@ def populate_board():
     for i in range(9):
         for j in range(9):
             num = get_valid_number(i, j, Rows, Cols, Squares)
-            if num == 99:
-                #print_board(board)
-                return [False, 0]
+            if num == 99: return [False, 0]
             
             board[i][j] = num
             update_dicts(i, j, num, Rows, Cols, Squares)
         
     return [True, board]      
 
+# Return a list where: First element is the generated sudoku board and Second element is the number of attempts for generation
 def create_board():
     valid_board = [False, 0]
     attempt_count = 0
@@ -108,7 +109,8 @@ def create_board():
         valid_board = populate_board()
         attempt_count += 1
 
-    print_board(valid_board[1])
-    print('Attempt number: ', str(attempt_count)) 
+    # print_board(valid_board[1])
+    # print('Attempt number: ', str(attempt_count)) 
+    return [valid_board[1], attempt_count]
 
-create_board()
+
